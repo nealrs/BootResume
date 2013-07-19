@@ -9,7 +9,7 @@ Because it's built on Bootstrap, the template is easy to modify and is mobile-re
 
 How to use BootResume
 ---------------------
-Check out the <a href="http://www.nealshyam.com">live demo</a> to see it in action and fork this repo!
+Check out the <a href="http://nealrs.github.io/BootResume">live demo</a> to see it in action and fork this repo! BTW, <a href="http://nealshyam.com">here's mine</a>
 
 Contribute
 ------------
