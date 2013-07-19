@@ -1,15 +1,15 @@
-BootResume
+BootRésumé
 ==========
 
-What is BootResume?
+What is BootRésumé?
 -------------------
-Bootstrap Resume turns your boring resume into a well organized online view, highlighting skills and accomplishments.
+Bootstrap Resume turns your long winded resume into a well organized static webpage, highlighting your skills and accomplishments.
 
-Because it's built on Bootstrap, the template is easy to modify and is mobile-ready out of the box!
+Because it's built on Bootstrap, the template is easy to modify and mobile-ready out of the box!
 
-How to use BootResume
+How to use BootRésumé
 ---------------------
-Check out the <a href="http://nealrs.github.io/BootResume">live demo</a> to see it in action and fork this repo! BTW, <a href="http://nealshyam.com">here's mine</a>.
+Check out the <a href="http://nealrs.github.io/BootResume">live demo</a> to see BR in action and then fork this repo! FYI, you can find my BR <a href = "http://nealshyam.com">right here</a>.
 
 Contribute
 ------------
@@ -17,4 +17,4 @@ This is a work in progress, and there's a lot more in the pipeline. I'd love to 
 
 License
 -------
-BootResume is open sourced under the MIT license.
+BootRésumé is open sourced under the MIT license.
