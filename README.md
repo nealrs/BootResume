@@ -3,9 +3,9 @@ BootRésumé
 
 What is BootRésumé?
 -------------------
-Bootstrap Resume turns your long winded resume into a well organized static webpage, highlighting your skills and accomplishments.
+BootRésumé turns your long winded resume into a well organized static webpage, highlighting your skills and accomplishments.
 
-Because it's built on Bootstrap, the template is easy to modify and mobile-ready out of the box!
+Because BR is built on Bootstrap, the template is easy to modify and mobile-ready out of the box!
 
 How to use BootRésumé
 ---------------------
