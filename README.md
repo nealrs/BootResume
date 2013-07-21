@@ -9,7 +9,7 @@ Because BR is built on Bootstrap, it's mobile ready out of the box and easy to m
 
 How to use BootRésumé
 ---------------------
-Check out the <a href="http://nealrs.github.io/BootResume">live demo</a> to see BR in action, and then fork/clone/download this repo to get the template. Copy and comment out line items as neccesary.
+Check out the <a href="http://nealrs.github.io/BootResume">live demo</a> to see BR in action, and then fork/clone/download this repo to get the [template](https://raw.github.com/nealrs/BootResume/master/index.html). Copy and comment out line items as neccesary.
 
 FYI, you can see my BootRésumé <a href = "http://nealshyam.com">right here</a>.
 
