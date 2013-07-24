@@ -19,6 +19,7 @@
   while ($user_table = $load_user->fetch(PDO::FETCH_ASSOC)){
     $name = $user_table['name'];
     $email = $user_table['email'];
+    $hash = md5(strtolower(trim($email)));
     $bgcolor = $user_table['bgcolor'];
     $bgtile = $user_table['bgtile'];
     $colorscheme = $user_table['colorscheme'];    
@@ -97,6 +98,42 @@
 
 //// BEGIN BODY (using arrays generated from mysql queries)
 
+// mobile & desktop headers
+  echo'
+  <body style="background:'.$bgcolor.'; padding-top:20px; padding-bottom:20px; background-image:url(\''.$bgtile.'\'); background-repeat:repeat;">
+
+  <!--- head block --->
+    <div class="container head_cont">
+      
+      <!--- tablet & desktop head --->
+      <div class="row span7 offset2 hidden-phone" style="padding-bottom:10px;">
+        <h2><img src="http://www.gravatar.com/avatar/'.$hash.'?s=200d=mm" height = "60px" width = "60px" class="tip img-circle" data-toggle="tooltip" title = "Hi there!"> '.$name.'</h2>
+      </div>
+      
+      <!--- mobile / phone head --->
+      <div class="row visible-phone" style="padding-bottom:10px;">
+        <div>
+          <h3><img src="http://www.gravatar.com/avatar/'.$hash.'?s=200d=mm" height = "60px" width = "60px" class="img-circle"> '.$name.'</h3>
+          <h3>'; 
+           
+// mobile social rail.        
+            $alt = -1;
+            while($x = $social[$alt+1]){
+        	  if ($social[$alt+2]){
+        	  	echo'<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'"><i class="'.$x[2].'"></i></a>&nbsp;&nbsp;';
+              } else { 
+                  echo'<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'"><i class="'.$x[2].'"></i></a>'; 
+                }
+              $alt++;  
+            }
+          
+          echo'</h3>
+        </div>
+      </div>
+      
+    </div>';
+
+// whitebox content
   echo'
   <!--- main content block --->  
     <div class="container body_cont">
@@ -249,9 +286,7 @@
 // regular social rail.        
         $alt = -1;
         while($x = $social[$alt+1]){
-          // run through a ton of if statements based on platford id/name	
-        	//print_r ($x);
-        	echo'<h2><a style="text-decoration: none" data-toggle="tooltip" class = "tip2" href="'.$x[3].$x[1]. 'title="'.$x[0].'"><i class="'.$x[2].'"></i></a></h2>';
+          echo'<h2><a style="text-decoration: none" data-toggle="tooltip" class = "tip2" href="'.$x[3].$x[1]. '" title="'.$x[0].'"><i class="'.$x[2].'"></i></a></h2>';
           $alt++;  
         }
       echo'
