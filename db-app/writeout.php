@@ -1,11 +1,11 @@
 <?php 
 // this script takes 1 input, userid, and writes out the full bootres html file. it will pull all the neccesary info from a mysql database, using select only credentials.
 
+// set userid based on passed parameter (manually set for now)
+  $userid = 'nealrs';
+
 // load db parameters, open PDO session, set table name
   require 'db_pdo_v.php';
-
-// set userid based on passed in parameter (just manually set for now)
-  $userid = 'nealrs';
   
 // Pull basic user info (name/avatar)
   $db_table = "users";
@@ -120,9 +120,9 @@
             $alt = -1;
             while($x = $social[$alt+1]){
         	  if ($social[$alt+2]){
-        	  	echo'<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'"><i class="'.$x[2].'"></i></a>&nbsp;&nbsp;';
+        	  	echo'<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a>&nbsp;&nbsp;';
               } else { 
-                  echo'<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'"><i class="'.$x[2].'"></i></a>'; 
+                  echo'<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a>'; 
                 }
               $alt++;  
             }
@@ -283,12 +283,12 @@
     
     <!-- contact / social icons for desktop/tablet view-->
     <div class="span1 hidden-phone text-left">';
-// regular social rail.        
-        $alt = -1;
-        while($x = $social[$alt+1]){
-          echo'<h2><a style="text-decoration: none" data-toggle="tooltip" class = "tip2" href="'.$x[3].$x[1]. '" title="'.$x[0].'"><i class="'.$x[2].'"></i></a></h2>';
-          $alt++;  
-        }
+// desktop/tablet social rail.        
+      $alt = -1;
+      while($x = $social[$alt+1]){
+        echo'<h2><a style="text-decoration: none" data-toggle="tooltip" class = "tip2" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a></h2>';
+        $alt++;  
+      }
       echo'
       </div>
     
