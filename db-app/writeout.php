@@ -107,7 +107,7 @@
       
       <!--- tablet & desktop head --->
       <div class="row span7 offset2 hidden-phone" style="padding-bottom:10px;">
-        <h2><img src="http://www.gravatar.com/avatar/'.$hash.'?s=200d=mm" height = "60px" width = "60px" class="tip img-circle" data-toggle="tooltip" title = "Hi there!"> '.$name.'</h2>
+        <h2><img src="http://www.gravatar.com/avatar/'.$hash.'?s=200d=mm" height = "80px" width = "80px" class="tip img-circle" data-toggle="tooltip" title = "Hi there!"> '.$name.'</h2>
       </div>
       
       <!--- mobile / phone head --->
