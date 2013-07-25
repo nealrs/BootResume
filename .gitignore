@@ -2,3 +2,4 @@
 .DS_Store
 
 db-app/db_info_a.php
+db-app/db_pdo_a.php
