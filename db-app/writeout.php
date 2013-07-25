@@ -1,9 +1,11 @@
 <?php 
-// this script takes 1 input, userid, and writes out the full bootres html file. it will pull all the neccesary info from a mysql database, using select only credentials.
+// this script takes 1 input, userid, and writes out the full bootres html file. it will pull all the neccesary info from a mysql database, using select/view only credentials.
 
-// set userid based on passed parameter (manually set for now)
-  $userid = 'nealrs';
-  //$userid = 'example';
+// set userid based on passed parameter & die if not provided.
+  if(isset($_GET['user'])){ $userid = $_GET['user']; } else { echo 'Error: You must supply a valid user id'; return; }
+
+// establish HTML container string
+  $HTML = "";
 
 // load db parameters, open PDO session, set table name
   require 'db_pdo_v.php';
@@ -43,7 +45,7 @@
 
 //// BEGIN HEADER
 
-  echo'<!DOCTYPE html>
+  $HTML.='<!DOCTYPE html>
   <html lang="en">
     <head>
     <meta charset="utf-8">
@@ -89,7 +91,7 @@
 //// BEGIN BODY (using arrays generated from mysql queries)
 
 // mobile & desktop headers
-  echo'
+  $HTML.='
   <body style="background:'.$bgcolor.'; padding-top:20px; padding-bottom:20px; background-image:url(\''.$bgtile.'\'); background-repeat:repeat;">
 
   <!--- head block --->
@@ -110,23 +112,24 @@
             $alt = -1;
             while($x = $social[$alt+1]){
         	  if ($social[$alt+2]){
-        	  	echo'<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a>
+        	  	$HTML.='<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a>
         	  	';
               } else { 
-                  echo'<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a>
+                  $HTML.='<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a>
                   '; 
                 }
               $alt++;  
             }
           
-          echo'</h3>
+          $HTML.='
+          </h3>
         </div>
       </div>
       
     </div>';
 
 // resume content
-  echo'
+  $HTML.='
   <!--- main content block --->  
     <div class="container body_cont">
     <div class="row span7 offset2" style=" background:white; padding:15px;">';
@@ -144,7 +147,7 @@
     
     $categoryindex = $cat_table['catindex'];
 
-	echo'
+	$HTML.='
 	<h3><i class="'.$cat[$alt][1].'"></i> '.$cat[$alt][0].'</h3>
         <ul style="padding-bottom:5px;">
     ';
@@ -162,7 +165,7 @@
     	  
     	  $lineitemindex = $line_table['lineitemindex'];
                   
-          echo'
+          $HTML.='
           <li style="padding-bottom:18px;">
            <a href="'.$line[$alt1][2].'"><strong>'.$line[$alt1][0].'</strong></a>, '.$line[$alt1][1].'<br>';
 
@@ -179,20 +182,20 @@
     	     $tag[$alt2][0] = strtolower($tag_table['tag']);
     	  	 $tag[$alt2][1] = $tag_table['color'];
     	     
-    	     echo'<span class="label '.$tag[$alt2][1].'">'.$tag[$alt2][0].'</span>
+    	     $HTML.='<span class="label '.$tag[$alt2][1].'">'.$tag[$alt2][0].'</span>
     	     ';
     	  	 $alt2++;
     	   }	 
-          echo'
+          $HTML.='
           </li>'; 
           $alt1++;
         }
-    echo'
+    $HTML.='
         </ul>
     '; 
     $alt++;
   }
-  echo'
+  $HTML.='
   </div>
     <!-- contact / social icons for desktop/tablet view-->
     <div class="span1 hidden-phone text-left">';
@@ -200,11 +203,11 @@
 // desktop/tablet social rail.        
       $alt = -1;
       while($x = $social[$alt+1]){
-        echo'<h2><a style="text-decoration: none" data-toggle="tooltip" class = "tip2" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a></h2>
+        $HTML.='<h2><a style="text-decoration: none" data-toggle="tooltip" class = "tip2" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a></h2>
         ';
         $alt++;  
       }
-      echo'
+      $HTML.='
       </div>
     
     </div><br>
@@ -213,7 +216,7 @@
 //// END BODY
 
 //// BEGIN FOOTER
-  echo'
+  $HTML.='
     <div class="container">
       <div class= "row">
         <span class="span8 offset2 text-center">
@@ -231,4 +234,15 @@
   
 // close mysql connection
   $db = null;
+
+// write HTML file to disk (in it's own userid directory)
+  if (!is_dir($userid)){ mkdir($userid, 0755); }
+  
+  $BR_FILE = $userid.'/index.HTML';
+  file_put_contents($BR_FILE, $HTML, LOCK_EX);
+
+// output HTML to console/screen  
+  echo $HTML;
+  
+  
 ?>
