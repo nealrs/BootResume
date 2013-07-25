@@ -27,8 +27,8 @@
   
 // pull social rail info & create array -- need to join this with a lookup table for social network names/icons/base urls
   $db_table = "social";
-  $db_table = "social_lookup";
-  $load_social = $db->prepare("SELECT * FROM social JOIN social_lookup ON social_lookup.index = social.platformindex WHERE userid = '$userid' AND active != '0'");
+  $db_table2 = "social_lookup";
+  $load_social = $db->prepare("SELECT * FROM social JOIN social_lookup ON social_lookup.index = social.platformindex WHERE userid = '$userid' AND active != '0' ORDER BY social.order ASC");
   $load_social->execute();
   
   $alt=0;
@@ -37,19 +37,9 @@
     $social[$alt][1] = $social_table['platformhandle'];
     $social[$alt][2] = $social_table['icon'];
     $social[$alt][3] = $social_table['url'];
-        
     $alt++;
   }
-  //var_dump ($social);
 
-  // pull category info & create array
-
-    // pull lineitem info & create array
-
-      // pull tag info & create array
-
-    
-    
 //// BEGIN HEADER
 
   echo'<!DOCTYPE html>
@@ -137,162 +127,89 @@
   echo'
   <!--- main content block --->  
     <div class="container body_cont">
-    <div class="row span7 offset2" style=" background:white; padding:15px;">
-        
-    <h3><i class="icon-briefcase"></i> Work</h3>
-    <ul style="padding-bottom:5px;">
-      <li>
-        <a href="http://adstruc.com"><strong>ADstruc</strong></a>, 2011 - Present<br>
-        <span class="label label-warning">account manager</span>
-        <span class="label">marketing</span>
-        <!--<span class="label">copywriting</span>-->
-        <span class="label">blog</span>
-        <span class="label">sales</span>
-        <span class="label">strategy</span>
-        <span class="label">media planning</span>
-        <!--<span class="label">crm</span>-->
-        
-      </li><br>
-      <li>
-        <a href="http://arnell.com"><strong>Arnell</strong></a>, 2011<br>
-        <span class="label label-warning">intern</span>
-        <span class="label">brand strategy</span>
-        <span class="label">research</span>
-        
-      </li><br>
-      <li>
-        <a href="http://ew.com"><strong>Entertainment Weekly</strong></a>, 2010 - 2011<br>
-        <span class="label label-warning">intern</span>
-        <span class="label">research</span>
-        <span class="label">analytics</span>
-        
-      </li><br>
-      <li>
-        <a href="http://figment.com"><strong>Figment</strong></a>, 2009 - 2010<br>
-        <span class="label label-warning">intern</span>
-        <span class="label">research</span>
-        <span class="label">financial modeling</span>
-        <span class="label">web design</span>
-        
-      </li><br>
-      <li>
-        <a href="http://cat.com"><strong>Caterpillar</strong></a>, 2005 - 2009<br>
-        <span class="label label-warning">engineer</span>
-        <!--<span class="label label-info">international assignment</span>-->
-        <span class="label">risk mitigation</span>
-        <span class="label">prototype</span>
-        <span class="label">cost reduction</span>
-        <span class="label">six sigma</span>
-        <span class="label">design</span>
-        <!--<span class="label">test</span>-->
-        <!--<span class="label">analysis</span>-->
-        <!--<span class="label">tier iv</span>-->
-        
-      </li>
-    </ul>
+    <div class="row span7 offset2" style=" background:white; padding:15px;">';
+
+// pull category info
+  $db_table = "category";
+  $db_table2 = "category_lookup";
+  $load_cat = $db->prepare("SELECT * FROM category JOIN category_lookup ON category_lookup.index = category.category WHERE userid = '$userid' AND active != '0' ORDER BY category.order ASC");
+  $load_cat->execute();
+  
+  $alt=0;
+  while ($cat_table = $load_cat->fetch(PDO::FETCH_ASSOC)){
+    $cat[$alt][0] = $cat_table['category'];
+    $cat[$alt][1] = $cat_table['icon'];
     
-    <h3><i class="icon-beaker"></i> Projects</h3>
-    <ul style="padding-bottom:5px;">
-      <li>
-        <a href="http://audioshocker.com"><strong>AudioShocker</strong></a>, pop-culture podcast network<br>
-        <span class="label label-warning">cofounder</span>
-        <span class="label">podcasting</span>
-        <span class="label">editorial</span>
-        <span class="label">web design</span>
-        
-      </li><br>
-      <li>
-        <a href="http://legalgrep.com"><strong>LegalGrep</strong></a>, document proximity search & legal software<br>
-        <span class="label label-warning">founder</span>
-        <span class="label">javascript</span>
-        <span class="label">css</span>
-        <span class="label">regex</span>
-        <span class="label">webapp</span>
-        
-      </li><br>
-      <li>
-        <a href="http://nealshyam.com/mta"><strong>MTA Traffic Charts</strong></a>, dynamic traffic charts for NYC subway stations<br>
-        <span class="label label-info">open source</span>
-        <span class="label">data visualization</span>
-        <span class="label">geo information</span>
-        <span class="label">javascript</span>
-        <span class="label">mysql</span>
-        <span class="label">d3</span>
-        
-      </li><br>
-      <li>
-        <a href="https://github.com/nealrs/BootResume#bootr%C3%A9sum%C3%A9"><strong>BootRésumé</strong></a>, mobile-ready website & résumé template<br>
-        <span class="label label-info">open source</span>
-        <!--<span class="label">markdown</span>-->
-        <span class="label">bootstrap</span>
-        <span class="label">css</span>
-        <span class="label">html</span>
-        <span class="label">mobile</span>
-        
-      </li><br>
-      <li>
-        <a href="https://github.com/nealrs/ScrollPop#scrollpop"><strong>ScrollPop</strong></a>, interactive comment-roll ads for WordPress<br>
-        <span class="label label-info">open source</span>
-        <span class="label">wordpress</span>
-        <span class="label">php</span>
-        <span class="label">display ads</span>
-        <span class="label">user engagement</span>
-        <span class="label">jquery</span>
-        
-      </li><br>
-      <li>
-        <a href="http://joketi.me"><strong>JokeTime</strong></a>, web & mobile app for stand up comedians [on hold]<br>
-        <span class="label label-warning">founder</span>
-        <span class="label">php</span>
-        <span class="label">web app</span>
-        <span class="label">comedy</span>
-        <span class="label">mobile</span>
-        
-      </li>
-    </ul>
+    $categoryindex = $cat_table['index'];
 
-    <!---<h3><i class="icon-comments"></i> Languages</h3>
-    <ul style="padding-bottom:5px;">
-      <li>
-        <a href=""><strong>english</strong></a><br>
-        <span class="label ">native</span>
-
-      </li><br>
-      <li>
-        <a href=""><strong>spanish</strong></a><br>
-        <span class="label ">working proficiency</span>
-
-      </li>
-    </ul>-->
-
-    <h3><i class="icon-book"></i> Education</h3>
-    <ul style="padding-bottom:5px;">
-      <li>
-        <a href="http://www.stern.nyu.edu/"><strong>NYU Stern School of Business</strong></a>, MBA Marketing, 2011<br>
-        <span class="label">media & entertainment conference</span>
-
-      </li><br>
-      <li>
-        <a href="http://cmu.edu"><strong>Carnegie Mellon University</strong></a>, B.S. Mechanical Engineering, 2005<br>
-        <span class="label">tartan comics editor</span>
-        <span class="label">short fiction press</span>
-
-      </li>
-    </ul>
-    </div>
+// categories
+    // pull tag info & create array
     
+	echo'
+	<h3><i class="'.$cat[$alt][1].'"></i> '.$cat[$alt][0].'</h3>
+        <ul style="padding-bottom:5px;">
+    ';
+      
+// lineitems
+  		$db_table = "lineitems";
+  		$load_line = $db->prepare("SELECT * FROM lineitems WHERE categoryindex = '$categoryindex' AND active != '0' ORDER BY lineitems.order ASC");
+  		$load_line->execute();
+  
+  		$alt1=0;
+  		while ($line_table = $load_line->fetch(PDO::FETCH_ASSOC)){  		
+    	  $line[$alt1][0] = $line_table['precomma'];
+    	  $line[$alt1][1] = $line_table['postcomma'];
+    	  $line[$alt1][2] = $line_table['link'];
+    	  
+    	  $lineitemindex = $line_table['lineitemindex'];
+          //echo $lineitemindex;  
+                  
+          echo'
+          <li style="padding-bottom:18px;">
+           <a href="'.$line[$alt1][2].'"><strong>'.$line[$alt1][0].'</strong></a>, '.$line[$alt1][1].'<br>';
+
+// tags
+		   $db_table = 'tags';
+		   $load_tags = $db->prepare("SELECT * FROM tags JOIN tag_lookup ON type = tagtype WHERE lineitemindex = '$lineitemindex' AND active != '0' ORDER BY tags.order ASC");
+  		   $load_tags->execute(); 
+  		 
+  		   $alt2 = 0;      
+           while ($tag_table = $load_tags->fetch(PDO::FETCH_ASSOC)){  
+           
+             //var_dump($tag_table);
+           		
+    	     $tag[$alt2][0] = strtolower($tag_table['tag']);
+    	  	 $tag[$alt2][1] = $tag_table['color'];
+    	     
+    	     echo'<span class="label '.$tag[$alt2][1].'">'.$tag[$alt2][0].'</span>
+    	     ';
+    	  	 $alt2++;
+    	   }	 
+          echo'
+          </li>'; 
+          $alt1++;
+        }
+    echo'
+        </ul>
+    '; 
+    $alt++;
+  }
+  echo'
+  </div>
     <!-- contact / social icons for desktop/tablet view-->
     <div class="span1 hidden-phone text-left">';
 // desktop/tablet social rail.        
       $alt = -1;
       while($x = $social[$alt+1]){
-        echo'<h2><a style="text-decoration: none" data-toggle="tooltip" class = "tip2" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a></h2>';
+        echo'<h2><a style="text-decoration: none" data-toggle="tooltip" class = "tip2" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a></h2>
+        ';
         $alt++;  
       }
       echo'
       </div>
     
-    </div><br>';
+    </div><br>
+    ';
 
 //// END BODY
 
