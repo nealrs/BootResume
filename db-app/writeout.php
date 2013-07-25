@@ -3,6 +3,7 @@
 
 // set userid based on passed parameter (manually set for now)
   $userid = 'nealrs';
+  //$userid = 'example';
 
 // load db parameters, open PDO session, set table name
   require 'db_pdo_v.php';
@@ -85,7 +86,6 @@
   </head>';
 //// END HEADER
 
-
 //// BEGIN BODY (using arrays generated from mysql queries)
 
 // mobile & desktop headers
@@ -110,9 +110,11 @@
             $alt = -1;
             while($x = $social[$alt+1]){
         	  if ($social[$alt+2]){
-        	  	echo'<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a>&nbsp;&nbsp;';
+        	  	echo'<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a>
+        	  	';
               } else { 
-                  echo'<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a>'; 
+                  echo'<a style="text-decoration: none" href="'.$x[3].$x[1]. '" title="'.$x[0].'" target="_blank"><i class="'.$x[2].'"></i></a>
+                  '; 
                 }
               $alt++;  
             }
@@ -123,13 +125,13 @@
       
     </div>';
 
-// whitebox content
+// resume content
   echo'
   <!--- main content block --->  
     <div class="container body_cont">
     <div class="row span7 offset2" style=" background:white; padding:15px;">';
 
-// pull category info
+// categories
   $db_table = "category";
   $db_table2 = "category_lookup";
   $load_cat = $db->prepare("SELECT * FROM category JOIN category_lookup ON category_lookup.index = category.category WHERE userid = '$userid' AND active != '0' ORDER BY category.order ASC");
@@ -140,11 +142,8 @@
     $cat[$alt][0] = $cat_table['category'];
     $cat[$alt][1] = $cat_table['icon'];
     
-    $categoryindex = $cat_table['index'];
+    $categoryindex = $cat_table['catindex'];
 
-// categories
-    // pull tag info & create array
-    
 	echo'
 	<h3><i class="'.$cat[$alt][1].'"></i> '.$cat[$alt][0].'</h3>
         <ul style="padding-bottom:5px;">
@@ -162,7 +161,6 @@
     	  $line[$alt1][2] = $line_table['link'];
     	  
     	  $lineitemindex = $line_table['lineitemindex'];
-          //echo $lineitemindex;  
                   
           echo'
           <li style="padding-bottom:18px;">
@@ -198,6 +196,7 @@
   </div>
     <!-- contact / social icons for desktop/tablet view-->
     <div class="span1 hidden-phone text-left">';
+    
 // desktop/tablet social rail.        
       $alt = -1;
       while($x = $social[$alt+1]){
@@ -212,7 +211,6 @@
     ';
 
 //// END BODY
-
 
 //// BEGIN FOOTER
   echo'
