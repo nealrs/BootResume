@@ -5,7 +5,7 @@ What is BootRésumé?
 -------------------
 BootRésumé turns long winded, bullet heavy résumés into streamlined static webpages, highlighting your skills & accomplishments. All dependencies are pulled via CDN to minimize load time & page weight.
 
-Because BR is built on Bootstrap, it's mobile ready out of the box and easy to modify.
+Because BR is built on Bootstrap 2.3.2 & Font Awesome, it's mobile ready out of the box and easy to modify.
 
 How to use BootRésumé
 ---------------------
